@@ -1,10 +1,18 @@
 import Head from "next/head";
 import Brand from "../components/Brand";
+import MoviesCollection from "../components/MoviesCollection";
 import Navbar from "../components/Navbar";
+import ShowsCollection from "../components/ShowsCollection";
 import Slider from "../components/Slider";
 import styles from "../styles/Home.module.css";
-
-export default function Home() {
+import axios from "axios";
+export default function Home({
+  popularMovies,
+  popularShows,
+  topMovies,
+  topShows,
+  trending,
+}) {
   return (
     <div>
       <Head>
@@ -16,7 +24,52 @@ export default function Home() {
       <main className="main">
         <Slider />
         <Brand />
+        <MoviesCollection results={trending} title="Trending" />
+        <MoviesCollection results={popularMovies} title="Popular Movies" />
+        {/* <ShowsCollection results={popularShows} title="Popular Shows" /> */}
+        {/* <MoviesCollection results={topMovies} title="Top Movies" /> */}
+        {/* <ShowsCollection results={topShows} title="Top Shows" /> */}
       </main>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const [
+    popularMoviesRes,
+    popularShowsRes,
+    topMoviesRes,
+    topShowsRes,
+    trendingRes,
+  ] = await Promise.all([
+    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}&language=en-US
+`),
+    fetch(`https://api.themoviedb.org/3/tv/popular?api_key=${process.env.API_KEY}&language=en-US
+`),
+    fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.API_KEY}&language=en-US
+`),
+    fetch(`https://api.themoviedb.org/3/tv/top_rated?api_key=${process.env.API_KEY}&language=en-US
+`),
+    fetch(
+      `https://api.themoviedb.org/3/trending/all/day?api_key=${process.env.API_KEY}`
+    ),
+  ]);
+
+  const [popularMovies, popularShows, topMovies, topShows, trending] =
+    await Promise.all([
+      popularMoviesRes.json(),
+      popularShowsRes.json(),
+      topMoviesRes.json(),
+      topShowsRes.json(),
+      trendingRes.json(),
+    ]);
+  return {
+    props: {
+      popularMovies: popularMovies.results || null,
+      popularShows: popularShows.results || null,
+      topMovies: topMovies.results || null,
+      topShows: topShows.results || null,
+      trending: trending.results || null,
+    },
+  };
 }

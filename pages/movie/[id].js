@@ -1,12 +1,13 @@
 import { PlusIcon, XIcon } from "@heroicons/react/solid";
 import Head from "next/head";
+import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 import Image from "next/image";
 import { useState } from "react";
 import ReactPlayer from "react-player";
 import Navbar from "../../components/Navbar";
 function Movie({ result }) {
   const BASE_URL = "https://image.tmdb.org/t/p/original/";
-  const [showPlayer, setShowPlayer] = useState(false);
+  const [Player, setPlayer] = useState(false);
   const index = result.videos.results.findIndex(
     (element) => element.type === "Trailer"
   );
@@ -40,7 +41,9 @@ function Movie({ result }) {
             </button>
             <button
               className="text-xs md:text-base bg-black/30 text-[#f9f9f9] border border-[#f9f9f9] flex items-center justify-center py-2.5 px-6 rounded hover:bg-[#c6c6c6]"
-              onClick={() => setShowPlayer(true)}
+              onClick={() => {
+                setPlayer(true);
+              }}
             >
               <img src="/images/play-icon-white.svg" className="h-6 md:h-8" />
               <span className="uppercase font-medium tracking-wide">
@@ -62,36 +65,33 @@ function Movie({ result }) {
           <h4 className="text-sm md:text-lg max-w-4xl">{result.overview}</h4>
         </div>
         {/* bg overlay */}
-        {showPlayer && (
-          <div className="absolute inset-0 bg-black opacity-50 h-full w-full z-50"></div>
-        )}
-        <div
-          className={
-            showPlayer
-              ? "absolute top-3 inset-x-[7%] md:inset-x-[13%] rounded overflow-hidden transition duration-1000 opacity-100 z-50"
-              : "absolute top-3 inset-x-[7%] md:inset-x-[13%] rounded overflow-hidden transition duration-1000 opacity-0"
-          }
-        >
-          <div className="flex items-center justify-between bg-black text-[#f9f9f9] p-3.5">
-            <span className="font-semibold">Play Trailer</span>
-            <div
-              // className="cursor-pointer w-8 h-8 flex justify-center items-center rounded-lg opacity-50 hover:opacity-75 hover:bg-[#0F0F0F]"
-              onClick={() => setShowPlayer(false)}
-            >
-              <XIcon className="h-5" />
+        {Player && (
+          <>
+            {" "}
+            <div className="absolute inset-0 bg-black opacity-50 h-full w-full z-50"></div>
+            <div className="absolute top-3 inset-x-[7%] md:inset-x-[13%] rounded overflow-hidden transition duration-1000 opacity-100 z-50">
+              <div className="flex items-center justify-between bg-black text-white p-3.5 pt-14">
+                <p className="font-semibold">Play Trailer</p>
+                <div
+                  className="cursor-pointer w-8 h-8 flex justify-center items-center rounded-lg opacity-50 hover:opacity-75 hover:bg-[#0F0F0F]"
+                  onClick={() => setPlayer(false)}
+                >
+                  <XIcon className="h-5" />
+                </div>
+              </div>
+              <div className="relative pt-[50%]">
+                <ReactPlayer
+                  url={`https://www.youtube.com/watch?v=${result.videos?.results[index]?.key}`}
+                  width="100%"
+                  height="100%"
+                  style={{ position: "absolute", top: "0", left: "0" }}
+                  controls={true}
+                  playing={Player}
+                />
+              </div>
             </div>
-          </div>
-          <div className="relative pt-[56.25%]">
-            <ReactPlayer
-              url={`https://www.youtube.com/watch?v=${result.videos?.results[index]?.key}`}
-              width="100%"
-              height="100%"
-              style={{ position: "absolute", top: "0", left: "0" }}
-              controls={true}
-              playing={showPlayer}
-            />
-          </div>
-        </div>
+          </>
+        )}
       </section>
     </div>
   );

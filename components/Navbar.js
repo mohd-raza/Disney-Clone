@@ -6,7 +6,9 @@ import {
   StarIcon,
 } from "@heroicons/react/solid";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 const Navbar = () => {
+  const router = useRouter();
   return (
     <div className="sticky bg-[#040714] h-[72px] top-0 z-[1000] flex items-center px-10 md:px-12">
       <Image
@@ -18,7 +20,7 @@ const Navbar = () => {
       />
       {/* Navbar Links */}
       <div className="hidden ml-40 md:flex items-center space-x-6 ">
-        <a className="navbar-link group">
+        <a className="navbar-link group" onClick={() => router.push("/")}>
           <HomeIcon className="h-4" />
           <span className="span">Home</span>
         </a>
@@ -43,10 +45,7 @@ const Navbar = () => {
           <span className="span">Series</span>
         </a>
       </div>
-      <button
-        className="ml-auto uppercase border px-4 py-1.5 rounded font-medium tracking-wide hover:bg-white hover:text-black transition duration-200"
-        onClick={signIn}
-      >
+      <button className="ml-auto uppercase border px-4 py-1.5 rounded font-medium tracking-wide hover:bg-white hover:text-black transition duration-200">
         Login
       </button>
     </div>

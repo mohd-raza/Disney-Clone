@@ -1,6 +1,5 @@
 import { PlusIcon, XIcon } from "@heroicons/react/solid";
 import Head from "next/head";
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 import Image from "next/image";
 import { useState } from "react";
 import ReactPlayer from "react-player";
@@ -58,9 +57,9 @@ function Movie({ result }) {
             </div>
           </div>
           <div>
-            {result.release_date || result.first_air_date}|{" "}
-            {Math.floor(result.runtime / 60)}h {result.runtime % 60}m|{" "}
-            {result.genres.map((genre) => genre.name + " ")}|{" "}
+            {result.release_date || result.first_air_date} •{" "}
+            {Math.floor(result.runtime / 60)}h {result.runtime % 60}m •{" "}
+            {result.genres.map((genre) => genre.name + " ")} •{" "}
           </div>
           <h4 className="text-sm md:text-lg max-w-4xl">{result.overview}</h4>
         </div>

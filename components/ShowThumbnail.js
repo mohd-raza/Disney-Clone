@@ -10,10 +10,7 @@ function ShowThumbnail({ res }) {
       onClick={() => router.push(`/show/${res.id}`)}
     >
       <Image
-        src={
-          `${BASE_URL}${res.backdrop_path || res.poster_path}` ||
-          `${BASE_URL}${res.poster_path}`
-        }
+        src={`${BASE_URL}${res.backdrop_path || res.poster_path}`}
         width={330}
         height={210}
         objectFit="cover"

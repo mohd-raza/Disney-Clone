@@ -26,8 +26,8 @@ export default function Home({
         <Brand />
         <MoviesCollection results={trending} title="Trending" />
         <MoviesCollection results={popularMovies} title="Popular Movies" />
-        <ShowsCollection results={popularShows} title="Popular Shows" />
         <MoviesCollection results={topMovies} title="Top Movies" />
+        <ShowsCollection results={popularShows} title="Popular Shows" />
         <ShowsCollection results={topShows} title="Top Shows" />
       </main>
     </div>

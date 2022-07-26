@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { GlobalProvider } from "../context/GlobalState";
 
 const MovieThumbnail = ({ res }) => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const MovieThumbnail = ({ res }) => {
         objectFit="cover"
         className="rounded-lg"
         alt="img"
+        o
       />
     </div>
   );

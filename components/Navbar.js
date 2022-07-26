@@ -24,11 +24,14 @@ const Navbar = () => {
           <HomeIcon className="h-4" />
           <span className="span">Home</span>
         </a>
-        <a className="navbar-link group">
+        <a className="navbar-link group" onClick={() => router.push("/Search")}>
           <SearchIcon className="h-4" />
           <span className="span">Search</span>
         </a>
-        <a className="navbar-link group">
+        <a
+          className="navbar-link group"
+          onClick={() => router.push("/WatchList")}
+        >
           <PlusIcon className="h-4" />
           <span className="span">Watchlist</span>
         </a>

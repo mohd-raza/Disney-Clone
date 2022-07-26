@@ -1,10 +1,12 @@
 import { PlusIcon, XIcon } from "@heroicons/react/solid";
+import { GlobalContext } from "../../context/GlobalState";
 import Head from "next/head";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import ReactPlayer from "react-player";
 import Navbar from "../../components/Navbar";
 function Movie({ result }) {
+  const { addToWatchlist } = useContext(GlobalContext);
   const BASE_URL = "https://image.tmdb.org/t/p/original/";
   const [Player, setPlayer] = useState(false);
   const index = result.videos.results.findIndex(
@@ -50,7 +52,10 @@ function Movie({ result }) {
               </span>
             </button>
             <div className="rounded-full border-2 border-white flex items-center justify-center cursor-pointer w-11 h-11 bg-black/60">
-              <PlusIcon className="h-6" />
+              <PlusIcon
+                className="h-6"
+                onClick={() => addToWatchlist(result)}
+              />
             </div>
             <div className="rounded-full border-2 border-white flex items-center justify-center cursor-pointer w-11 h-11 bg-black/60">
               <img src="/images/group-icon.svg" alt="" />

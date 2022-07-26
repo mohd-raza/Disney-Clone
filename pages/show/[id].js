@@ -1,15 +1,19 @@
-import { useState } from "react";
-import { PlusIcon, XIcon } from "@heroicons/react/solid";
+import { useState, useContext } from "react";
+import { GlobalContext } from "../../context/GlobalState";
+import { PlusIcon, XIcon, X } from "@heroicons/react/solid";
 import Head from "next/head";
 import Image from "next/image";
 import ReactPlayer from "react-player";
 import Navbar from "../../components/Navbar";
 const Show = ({ result }) => {
   const BASE_URL = "https://image.tmdb.org/t/p/original/";
+  const { addToWatchlist, watchlist } = useContext(GlobalContext);
   const [Player, setPlayer] = useState(false);
   const index = result.videos.results.findIndex(
     (element) => element.type === "Trailer"
   );
+  let storedMovie = watchlist.find((watch) => watch.id === result.id);
+  const watchlistDisabled = storedMovie ? true : false;
   return (
     <div className="">
       <Head>
@@ -53,7 +57,11 @@ const Show = ({ result }) => {
               </span>
             </button>
             <div className="rounded-full border-2 border-white flex items-center justify-center w-11 h-11 cursor-pointer bg-black/60">
-              <PlusIcon className="h-6" />
+              <PlusIcon
+                className="h-6"
+                aria-disabled={watchlistDisabled}
+                onClick={() => addToWatchlist(result)}
+              />
             </div>
 
             <div className="rounded-full border-2 border-white flex items-center justify-center w-11 h-11 cursor-pointer bg-black/60">

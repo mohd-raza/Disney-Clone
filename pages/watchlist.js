@@ -16,7 +16,7 @@ const WatchList = () => {
       <Navbar />
       {watchlist.length === 0 ? (
         <div className="flex justify-center items-center mt-10">
-          <h1 className="font-bold text-4xl">ADD MOVIES!!!</h1>
+          <h1 className="font-bold text-4xl">ADD MOVIES OR SHOWS!!!</h1>
         </div>
       ) : (
         <div className="grid grid-cols-3 gap-4 mt-16 ml-40 mb-16">

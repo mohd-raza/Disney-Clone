@@ -1,17 +1,17 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
+import { getApp, initializeApp, getApps } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 const firebaseConfig = {
-  apiKey: "AIzaSyBLyMxtMhE3oL8tAE1YlXeATooF7qA9p9U",
-  authDomain: "disney-clone-1102d.firebaseapp.com",
-  projectId: "disney-clone-1102d",
-  storageBucket: "disney-clone-1102d.appspot.com",
-  messagingSenderId: "917627742875",
-  appId: "1:917627742875:web:4215e4291199407846f43e",
+  apiKey: "AIzaSyCk60eojzpfXnDN_TiqyJSIRZpKIAxw2c4",
+  authDomain: "disney-app-a922b.firebaseapp.com",
+  storageBucket: "disney-app-a922b.appspot.com",
+  messagingSenderId: "1020571980045",
+  appId: "1:1020571980045:web:b615881942d60346da2044",
+  projectId: "disney-app-a922b",
 };
+const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig);
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+export { app, db, storage };

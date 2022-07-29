@@ -16,7 +16,6 @@ const Search = () => {
   const handleChange = (e) => {
     e.preventDefault();
     setType(e.target.value);
-    console.log(type);
   };
 
   const onChange = (e) => {

@@ -23,3 +23,6 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the demo
+
+Simple Demo:
+![image](https://user-images.githubusercontent.com/91888013/181789133-8d736862-f2b6-4d1d-8254-2e7aec04c86e.png)
